@@ -25,7 +25,7 @@
 #include "Stream.h"
 
 #define LoraWan_COMMAND_FRAME_SOF	0xEF
-#define LoraWan_COMMAND_TO_OFFSET	100	// (ms)
+#define LoraWan_COMMAND_TO_OFFSET	1000	// (ms)
 
 #define LoraWan_MODE_ENDDEVICE		0x00
 #define LoraWan_MODE_FORWARDER		0x01

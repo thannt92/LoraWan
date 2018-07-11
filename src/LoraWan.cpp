@@ -63,7 +63,7 @@ uint8_t* LoraWan::getMsgData(uint8_t* msg) {
 
 int LoraWan::setOperationMode(uint8_t operationMode) {
 	uint8_t sReturn;
-	if (loraStreamPushReqResCmdFrame(CMD_ENDD_SET_ACTIVE_MODE, &operationMode, sizeof(uint8_t), &sReturn, sizeof(uint8_t)) == 0) {
+	if (loraStreamPushReqResCmdFrame(CMD_SET_MODE, &operationMode, sizeof(uint8_t), &sReturn, sizeof(uint8_t)) == 0) {
 		return sReturn;
 	}
 	return -1;
@@ -564,7 +564,9 @@ int LoraWan::loraStreamParser(uint8_t byteData) {
 }
 
 void LoraWan::loraStreamFlush() {
+	uint8_t c;
 	while (mLoraStream->available()) {
-		(void)mLoraStream->read();
+		c = mLoraStream->read();
+		(void)c;
 	}
 }

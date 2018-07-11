@@ -8,9 +8,31 @@ uint32_t exDeviceAddress = 0xAAAA0001;
 uint8_t exAppSKey[16]	= {0x08, 0x60, 0x05, 0x03, 0x40, 0xDB, 0x05, 0x00, 0xE4, 0x02, 0xC0, 0x4F, 0x0E, 0x70, 0xAD, 0x0B};
 uint8_t exNwkKey[16]	= {0x0D, 0xB0, 0x3B, 0x08, 0x40, 0x50, 0x06, 0x70, 0xFD, 0x00, 0xF0, 0x04, 0x0D, 0xB0, 0xA9, 0x0A};
 
+void exLoraWanHandleIncommingMsg(uint8_t* msg) {
+	uint8_t sMsgCmdId = exLoraWan.getMsgCommandId(msg);
+	//uint8_t sMsgLen = exLoraWan.getMsgDataLength(msg);
+	//uint8_t* sMsgData = exLoraWan.getMsgData(msg);
+
+	switch (sMsgCmdId) {
+	case LoraWan::CMD_ENDD_RECV_CONFIRM_MSG: {
+
+	}
+		break;
+
+	case LoraWan::CMD_ENDD_RECV_UNCONFIRM_MSG: {
+
+	}
+		break;
+
+	default:
+		break;
+	}
+}
+
 void setup() {
 	Serial.begin(115200);
 	loraStream.begin(9600);
+	exLoraWan.incommingMsgHandlerRegister(exLoraWanHandleIncommingMsg);
 
 	exLoraWan.setOperationMode(LoraWan_MODE_ENDDEVICE);
 	exLoraWan.setDeviceClass(LoraWan_CLASS_C);
